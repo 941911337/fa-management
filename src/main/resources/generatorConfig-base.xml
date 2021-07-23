@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- classPathEntry:数据库的JDBC驱动的jar包地址 -->
+	<classPathEntry
+		location="E:\maven\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar" />
+
+
+	<context id="caigouTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+			connectionURL="jdbc:mysql://139.198.172.140:3306/fa-management?useSSL=false&amp;nullCatalogMeansCurrent=true&amp;serverTimezone=UTC"
+						userId="dbname"
+			password="dbPwd123@">
+		</jdbcConnection>
+		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
+			userId="yycg"
+			password="yycg">
+		</jdbcConnection> -->
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="cn.john.model"
+			targetProject="./src/main/java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+        <!-- targetProject:自动mapper的位置 -->
+		<sqlMapGenerator targetPackage="source"
+			targetProject="./src/main/resources/mappers">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="cn.john.dao"
+			targetProject="./src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+<!--		<table domainObjectName="TUserMenu" tableName="t_user_menu"></table>-->
+<!-- 		<table domainObjectName="TAnnualReportWebsite" tableName="t_annual_report_website"></table> -->
+<!-- 		<table domainObjectName="TExecutedInfo" tableName="t_executed_info"></table>-->
+<!-- 				<table domainObjectName="ThirdTableMapping" tableName="third_table_mapping"></table> -->
+<!-- 			<table domainObjectName="VersionTableMapping" tableName="version_table_mapping"></table> -->
+<!-- 	<table domainObjectName="TSystemLog" tableName="t_system_log"></table> -->
+<!-- 	<table domainObjectName="TUser" tableName="t_user"></table> -->
+<!-- 				<table domainObjectName="TCompanyIdx" tableName="t_company_idx"></table> -->
+<!-- 		<table domainObjectName="TEquityChangeInfo" tableName="t_equity_change_info"></table> -->
+<!-- 		<table domainObjectName="TMorOrgInfo" tableName="t_mor_org_info"></table> -->
+<!-- 		<table domainObjectName="TMorGuaInfo" tableName="t_mor_gua_info"></table> -->
+<!--		<table domainObjectName="GuaranteeInfo" tableName="guarantee_info"></table>-->
+<!--		<table domainObjectName="TWebsiteRecordInfo" tableName="t_website_record_info"></table>-->
+<!--		<table domainObjectName="TRegCompany" tableName="t_reg_company"></table>-->
+<!--		<table domainObjectName="TIpBlacklist" tableName="t_ip_blacklist"></table>-->
+<!--		<table domainObjectName="AreaThirdConfig" tableName="area_third_config"></table>-->
+		<table domainObjectName="Account" tableName="t_account"></table>
+
+<!-- 		<table domainObjectName="TMortgageInfo" tableName="t_mortgage_info"></table> -->
+<!-- 		<table domainObjectName="TCpwsPartyInfo" tableName="t_cpws_party_info"></table> -->
+<!-- 		<table domainObjectName="TAdministrativePermissionInfo" tableName="T_Administrative_Permission_Info"></table> -->
+<!-- 		<table domainObjectName="TCompany" tableName="t_company"></table>-->
+<!-- 		<table domainObjectName="TInvestorContributiveInfo" tableName="t_investor_contributive_info"></table> -->
+<!-- 		<table domainObjectName="TStuff" tableName="t_stuff"></table> -->
+<!-- 		<table domainObjectName="TInvestInfo" tableName="t_invest_info"></table>-->
+<!-- 		<table domainObjectName="TChangeInfo" tableName="t_change_info"></table> -->
+<!-- 		<table domainObjectName="TBranchInfo" tableName="t_branch_info"></table> -->
+<!-- 		<table domainObjectName="TFrInvestInfo" tableName="t_fr_invest_info"></table>-->
+<!-- 		<table domainObjectName="TFrPositionInfo" tableName="t_fr_position_info"></table>-->
+<!--		<table domainObjectName="TEntRel" tableName="t_ent_rel"></table>-->
+<!-- 		<table domainObjectName="TFinalShareholderInfo" tableName="t_final_shareholder_info"></table> -->
+<!-- 		<table domainObjectName="TDishonestInfo" tableName="t_dishonest_info"></table> -->
+<!-- 		<table domainObjectName="TSharesFrostInfo" tableName="t_shares_frost_info"></table> -->
+<!-- 		<table domainObjectName="TLiquidationInfo" tableName="t_liquidation_info"></table> -->
+<!-- 		<table domainObjectName="TPunishmentInfo" tableName="t_punishment_info"></table> -->
+<!-- 		<table domainObjectName="TOwingTaxesInfo" tableName="t_owing_taxes_info"></table> -->
+<!-- 		<table domainObjectName="TAbnormalInfo" tableName="t_abnormal_info"></table> -->
+<!-- 		<table domainObjectName="TDayCheckInfo" tableName="t_day_check_info"></table> -->
+<!-- 		<table domainObjectName="TWarnInfo" tableName="t_warn_info"></table> -->
+<!-- 		<table domainObjectName="TStockStageFact" tableName="t_stock_stage_fact"></table> -->
+<!-- 		<table domainObjectName="TStockStageShould" tableName="t_stock_stage_should"></table> -->
+<!-- 		<table domainObjectName="TCompanyManagement" tableName="t_company_management"></table> -->
+<!-- 		<table domainObjectName="TImportExportTrade" tableName="t_import_export_trade"></table> -->
+<!-- 		<table domainObjectName="TStockTransfer" tableName="t_stock_transfer"></table> -->
+<!-- 		<table domainObjectName="TEquityInfo" tableName="t_equity_info"></table> -->
+
+<!-- 		<table domainObjectName="TAnnualReportBase" tableName="t_annual_report_base"></table>-->
+<!-- 		<table domainObjectName="TAnnualReportStock" tableName="t_annual_report_stock"></table> -->
+<!-- 		<table domainObjectName="TAnnualReportInfo" tableName="t_annual_report_info"></table> -->
+<!-- 		<table domainObjectName="TAnnualReportFinanceSupport" tableName="t_annual_report_finance_support"></table> -->
+<!-- 		<table domainObjectName="TAnnualReportInvest" tableName="t_annual_report_invest"></table> -->
+<!-- 		<table domainObjectName="TAnnualReportFact" tableName="t_annual_report_fact"></table> -->
+<!-- 		<table domainObjectName="TAnnualReportShould" tableName="t_annual_report_should"></table> -->
+<!-- 		<table domainObjectName="TWebsiteMonitor" tableName="t_website_monitor"></table> -->
+<!-- 		<table domainObjectName="TCompanyHonor" tableName="t_company_honor"></table> -->
+<!-- 		<table domainObjectName="TDeptQualifications" tableName="t_dept_qualifications"></table> -->
+<!-- 		<table domainObjectName="TPatentInfo" tableName="t_patent_info"></table> -->
+<!-- 		<table domainObjectName="TBrandInfo" tableName="t_brand_info"></table> -->
+<!-- 		<table domainObjectName="TFamousTradeMark" tableName="t_famous_trade_mark"></table> -->
+<!-- 		<table domainObjectName="TPersonalPermission" tableName="t_personal_permission"></table> -->
+<!-- 		<table domainObjectName="TAdvertisementLicence" tableName="t_advertisement_licence"></table> -->
+<!-- 		<table domainObjectName="TAgriculturalRegilation" tableName="t_agricultural_regilation"></table> -->
+<!-- 		<table domainObjectName="TCustomersComplaints" tableName="t_customers_complaints"></table> -->
+<!-- 		<table domainObjectName="TWorkCopyRight" tableName="t_work_copy_right"></table> -->
+<!-- 		<table domainObjectName="TIcpInfo" tableName="t_icp_info"></table> -->
+<!-- 		<table domainObjectName="TCopyRightInfo" tableName="t_copy_right_info"></table> -->
+<!-- 		<table domainObjectName="THistoryCompanyNameInfo" tableName="t_history_company_name_info"></table> -->
+<!-- 		<table domainObjectName="TStockInfo" tableName="t_stock_info"></table> -->
+<!-- 		<table domainObjectName="TTopTenInvestorInfo" tableName="t_top_ten_investor_info"></table> -->
+<!-- 		<table domainObjectName="TIllegalInfo" tableName="t_illegal_info"></table> -->
+<!-- 		<table domainObjectName="TLawSuitInfo" tableName="t_law_suit_info"></table> -->
+<!--			<table domainObjectName="TLawCaseInfo" tableName="t_law_case_info" enableSelectByPrimaryKey="true"-->
+<!--				   enableUpdateByPrimaryKey="true"-->
+<!--				   enableDeleteByPrimaryKey="true"></table>-->
+<!--			<table domainObjectName="WsConfig" tableName="ws_config"></table>-->
+<!--			<table domainObjectName="WsParamsConfig" tableName="ws_params_config"></table>-->
+<!--		<table domainObjectName="BeanCodeToDesc" tableName="bean_code_to_desc"></table>-->
+<!--			<table domainObjectName="PTHouseFundOrgBaseInfo" tableName="p_t_house_fund_org_base_info"></table>-->
+<!--			<table domainObjectName="WsParamsRuleConfig" tableName="ws_params_rule_config"></table>-->
+<!--		<table domainObjectName="TOprWaterInfo" tableName="t_opr_water_info"></table>-->
+<!--		<table domainObjectName="TPunishmentInfo" tableName="t_punishment_info"></table>-->
+<!-- 		<table domainObjectName="TKtggInfo" tableName="t_ktgg_info"></table>-->
+<!-- 		<table domainObjectName="TCourtAnnouncementsInfo" tableName="t_court_announcements_info"></table> -->
+<!-- 		<table domainObjectName="TWdhmdInfo" tableName="t_wdhmd_info"></table> -->
+<!-- 		<table domainObjectName="TAjlcInfo" tableName="t_ajlc_info"></table> -->
+<!-- 		<table domainObjectName="TBgtInfo" tableName="t_bgt_info"></table> -->
+<!-- 		<table domainObjectName="TCpwsAllInfo" tableName="t_cpws_all_info"></table> -->
+
+		
+		
+
+	</context>
+</generatorConfiguration>

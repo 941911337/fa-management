@@ -1,0 +1,22 @@
+spring:
+  redis:
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 20
+        min-idle: 8
+        max-wait: -1
+
+logging:
+  file:
+    level:
+      root: INFO
+  level:
+    cn:
+      john:
+        dao: DEBUG
+
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    namespace: dev

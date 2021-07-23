@@ -1,0 +1,55 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /fa
+
+spring:
+  profiles:
+    active: uat
+  application:
+    name: fa-management
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      minimum: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mappers/*
+  type-aliases-package: cn.john.model
+  configuration:
+    cache-enable: uat
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  file:
+    name: /opt/logs/fa/fa-management.log
+
+
+#令牌桶限流
+bucket4j:
+  enabled: true
+  filters:
+    - cache-name: buckets
+      url: .*
+      rate-limits:
+        - bandwidths:
+            - capacity: 10
+              time: 1
+              unit: seconds
+
+
+
