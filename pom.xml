@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.john</groupId>
     <artifactId>fa-management</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>fa-management</name>
     <description>fa-management project for Spring Boot</description>
 
