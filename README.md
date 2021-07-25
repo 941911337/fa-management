@@ -3,7 +3,7 @@
 本项目可作为开发脚手架进行使用,去除掉部分业务代码即可
 本项目使用
 
-springbooot (MVC框架)
+springboot (MVC框架)
 
 mybatis-plus (持久层框架)
 
