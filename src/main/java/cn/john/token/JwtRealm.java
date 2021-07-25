@@ -2,8 +2,7 @@ package cn.john.token;
 
 import cn.john.common.Constants;
 import cn.john.exception.BusinessException;
-import cn.john.model.Account;
-import cn.john.token.JwtToken;
+import cn.john.model.TAccount;
 import cn.john.utils.RedisUtil;
 import cn.john.utils.SysUtil;
 import cn.john.utils.TokenUtil;
@@ -11,13 +10,14 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description JwtRealm
  * @Date 2021/7/14
  **/
@@ -72,7 +72,7 @@ public class JwtRealm extends AuthorizingRealm {
         Long id = Long.parseLong(claim.get("id").toString());
         String client = (String) claim.get("clientId");
         //判断数据库中username是否存在
-        Account account = (Account) RedisUtil.hGet(Constants.LOGIN_CACHE_NAMESPACE+id,"account");
+        TAccount account = (TAccount) RedisUtil.hGet(Constants.LOGIN_CACHE_NAMESPACE+id,"account");
         if(!account.getAccount().equals(username)){
             throw new BusinessException("请重新登录");
         }

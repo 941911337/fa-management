@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +51,7 @@ public class RedisConfig {
     public JedisConnectionFactory redisConnectionFactory(JedisPoolConfig poolConfig) {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(server, port);
         config.setPassword(RsaUtil.pubDecrypt(pass,key));
+        config.setDatabase(2);
         return new JedisConnectionFactory(config, JedisClientConfiguration.builder().usePooling().poolConfig(poolConfig).build());
     }
 
@@ -68,6 +71,9 @@ public class RedisConfig {
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance ,
                 ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        // 解决jackson2无法反序列化LocalDateTime的问题
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.registerModule(new JavaTimeModule());
         valueSerializer.setObjectMapper(objectMapper);
 
         // 设置value的序列化规则和 key的序列化规则

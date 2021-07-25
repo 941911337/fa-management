@@ -3,7 +3,7 @@ package cn.john.token;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description JwtToken
  * @Date 2021/7/14
  **/

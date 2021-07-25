@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.john.dao.TAccountMapper">
+
+    <select id="getUserList" resultType="cn.john.dto.UserVo">
+        select id,account,user_name userName,
+        (select phone from t_employee where id = t.employee_id) phone
+        ,remark
+        from t_account t
+        <where>
+            <if test="userName != null and userName != ''">
+                and user_name like CONCAT('%',#{userName},'%')
+            </if>
+            and is_del = 0
+        </where>
+        order by created_time desc
+
+    </select>
+    <select id="getUserDetail" resultType="cn.john.dto.UserVo">
+        select id,account,user_name userName,password,
+               (select phone from t_employee where id = t.employee_id) phone
+                ,remark
+        from t_account t where t.id = #{id}
+    </select>
+</mapper>

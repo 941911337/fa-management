@@ -5,7 +5,7 @@ import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.mgt.DefaultWebSubjectFactory;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description JwtDefaultSubjectFactory
  * @Date 2021/7/14
  **/

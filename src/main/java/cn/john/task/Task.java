@@ -1,14 +1,10 @@
 package cn.john.task;
 
-import cn.john.model.Enclosure;
+import cn.john.model.TEnclosure;
 import cn.john.oss.OssClient;
-import cn.john.oss.OssInterface;
-import cn.john.service.EnclosureService;
+import cn.john.service.ITEnclosureService;
 import cn.john.utils.SysUtil;
-import com.alibaba.nacos.shaded.org.checkerframework.checker.units.qual.C;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,16 +23,19 @@ import java.util.List;
 @Conditional(value = {TaskCondition.class})
 public class Task {
 
-    @Autowired
-    private EnclosureService enclosureService;
+    private final ITEnclosureService enclosureService;
+
+    public Task(ITEnclosureService enclosureService) {
+        this.enclosureService = enclosureService;
+    }
 
 
     @Scheduled(cron = "0 0/5 * * * ?  ")
     public void backUp(){
         log.info("==================定时执行开始=========================");
         SysUtil.markTask();
-        List<Enclosure> needList = enclosureService.getNeedBackUp();
-        for (Enclosure enclosure : needList) {
+        List<TEnclosure> needList = enclosureService.getNeedBackUp();
+        for (TEnclosure enclosure : needList) {
             if(OssClient.download(enclosure.getPath())){
                 enclosureService.markDownLoad(enclosure.getId());
             }

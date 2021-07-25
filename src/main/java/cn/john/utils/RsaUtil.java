@@ -7,7 +7,7 @@ import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description RsaUtil
  * @Date 2021/7/21
  **/

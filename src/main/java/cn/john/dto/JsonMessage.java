@@ -8,7 +8,7 @@ import java.io.Serializable;
 import static cn.john.common.BaseMessage.*;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description JsonMessage
  * @Date 2021/7/15
  **/
@@ -16,10 +16,19 @@ import static cn.john.common.BaseMessage.*;
 @AllArgsConstructor
 public class JsonMessage<T> implements Serializable {
 
+    /**
+     * 返回值
+     */
     private String msg;
 
+    /**
+     * 代码
+     */
     private int code;
 
+    /**
+     * 数据
+     */
     private T data;
 
 

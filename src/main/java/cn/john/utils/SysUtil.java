@@ -1,18 +1,23 @@
 package cn.john.utils;
 
+import cn.hutool.json.JSONUtil;
 import cn.john.common.Constants;
+import cn.john.dto.ClassVo;
 import cn.john.dto.JsonMessage;
-import cn.john.model.Account;
+import cn.john.exception.ParamException;
+import cn.john.model.TAccount;
+import cn.john.model.TDict;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description SysUtil
  * @Date 2021/7/16
  **/
@@ -20,7 +25,7 @@ public abstract class SysUtil {
 
     private static  final ThreadLocal<Long> CURRENT_LOGIN_USER = new ThreadLocal<>();
 
-    public static void putUser(Account account){
+    public static void putUser(TAccount account){
         CURRENT_LOGIN_USER.set(account.getId());
     }
 
@@ -28,12 +33,12 @@ public abstract class SysUtil {
     private static final ThreadLocal<Boolean> IS_TASK = new ThreadLocal<>();
 
 
-    public static Account getUser(){
+    public static TAccount getUser(){
         if(IS_TASK.get() != null &&  IS_TASK.get() ){
-            return Account.createAccount().initId(-1L);
+            return TAccount.createAccount().initId(-1L);
         }
         Long userId = CURRENT_LOGIN_USER.get();
-        return (Account) RedisUtil.hGet(Constants.LOGIN_CACHE_NAMESPACE+userId,"account");
+        return (TAccount) RedisUtil.hGet(Constants.LOGIN_CACHE_NAMESPACE+userId,"account");
     }
 
     public static void logout(){
@@ -53,7 +58,7 @@ public abstract class SysUtil {
                     .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
             if(!CollectionUtils.isEmpty(collect)){
                 String errors = org.apache.commons.lang3.StringUtils.join(collect.toArray(), ",");
-                return JsonMessage.paramError(errors);
+                throw new ParamException(errors);
             }
         }
         return null;
@@ -70,7 +75,6 @@ public abstract class SysUtil {
 
     /**
      * 定时任务线程标记
-     * @return
      */
     public static void markTask(){
         IS_TASK.set(true);
@@ -78,8 +82,7 @@ public abstract class SysUtil {
 
 
     /**
-     * 定时任务线程标记
-     * @return
+     * 清除ThreadLocal
      */
     public static void removeTask(){
         IS_TASK.remove();
@@ -87,10 +90,32 @@ public abstract class SysUtil {
 
 
     /**
-     * 定时任务线程标记
-     * @return
+     * 清除ThreadLocal
      */
     public static void removeThreadUser(){
         CURRENT_LOGIN_USER.remove();
     }
+
+
+    /**
+     * 获取字典值
+     * @param key key
+     * @return 字典
+     */
+    public static Map<String,String> getDict(String key){
+        List<TDict> dict = JSONUtil.toList(JSONUtil.toJsonStr(RedisUtil.hGet("dictMap",key)),TDict.class);
+        return dict.stream().collect(Collectors.toMap(TDict::getValue, TDict::getLabel));
+    }
+
+    /**
+     * 获取资产分类
+     * @return 资产名称id对应关系
+     */
+    public static Map<Long,String> getClassDict(){
+        List<ClassVo> classVoList = (List<ClassVo>)  RedisUtil.get("class");
+        return classVoList.stream().collect(Collectors.toMap(ClassVo::getId, ClassVo::getClassName));
+    }
+
+
+
 }

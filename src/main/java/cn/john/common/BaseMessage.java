@@ -1,6 +1,7 @@
 package cn.john.common;
 
 /**
+ * 返回值定义
  * @author John Yan
  */
 

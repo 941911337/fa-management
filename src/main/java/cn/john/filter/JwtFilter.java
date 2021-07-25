@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description JwtFilter
  * @Date 2021/7/14
  *  自定义一个Filter，用来拦截所有的请求判断是否携带Token

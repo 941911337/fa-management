@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description OssClient
  * @Date 2021/7/20
  **/

@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description OSSInterface
  * @Date 2021/7/19
  **/

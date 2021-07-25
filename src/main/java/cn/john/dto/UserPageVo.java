@@ -3,7 +3,7 @@ package cn.john.dto;
 import lombok.Data;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description LoginVo
  * @Date 2021/7/16
  **/

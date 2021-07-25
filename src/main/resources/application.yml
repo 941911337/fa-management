@@ -16,7 +16,7 @@ spring:
       auto-commit: true
       idle-timeout: 30000
       pool-name: HikariCP
-      max-lifetime: 1800000
+      max-lifetime: 180000
       connection-timeout: 30000
       connection-test-query: SELECT 1
   cache:
@@ -24,15 +24,18 @@ spring:
       config: classpath:ehcache.xml
 
 
-
-
-
-mybatis:
-  mapper-locations: classpath:mappers/*
-  type-aliases-package: cn.john.model
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
   configuration:
-    cache-enable: uat
+    cache-enable: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: cn.john.model
+  mapper-locations: classpath:mappers/*
+
+
 
 logging:
   file:

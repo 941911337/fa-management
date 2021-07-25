@@ -3,7 +3,7 @@ package cn.john.exception;
 import lombok.Data;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description BusinessException
  * @Date 2021/7/15
  **/

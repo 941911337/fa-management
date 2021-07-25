@@ -1,11 +1,11 @@
 package cn.john;
 
 import cn.hutool.json.JSONUtil;
-import cn.john.model.Dict;
+import cn.john.model.TDict;
 import cn.john.oss.OssClient;
 import cn.john.oss.OssInterface;
-import cn.john.service.AssetClassService;
-import cn.john.service.DictService;
+import cn.john.service.ITAssetClassService;
+import cn.john.service.ITDictService;
 import cn.john.token.TokenConfig;
 import cn.john.utils.RedisUtil;
 import cn.john.utils.TokenUtil;
@@ -30,7 +30,6 @@ import java.util.Map;
  */
 @EnableScheduling
 @SpringBootApplication(scanBasePackages = "cn.john")
-@MapperScan("cn.john.dao")
 @EnableTransactionManagement
 @EnableCaching
 @EnableAspectJAutoProxy
@@ -46,11 +45,13 @@ public class FaManagementApplication {
 
 
     @Bean
-    public InitializingBean initializingBean(RedisTemplate<Serializable, Serializable> redisTemplate, DictService dictService,
-                                             AssetClassService assetClassService, OssInterface ossInterface, TokenConfig tokenConfig) {
+    public InitializingBean initializingBean(RedisTemplate<Serializable, Serializable> redisTemplate,
+                                             ITDictService dictService,
+                                             ITAssetClassService assetClassService,
+                                             OssInterface ossInterface, TokenConfig tokenConfig) {
         return () -> {
             RedisUtil.setRedisTemplate(redisTemplate);
-            Map<String, List<Dict>> dictMap = dictService.getAllDict();
+            Map<String, List<TDict>> dictMap = dictService.getAllDict();
             RedisUtil.set("dict", JSONUtil.parse(dictMap));
             dictMap.forEach((k,v)->RedisUtil.hPut("dictMap",k, JSONUtil.parse(v)));
             assetClassService.initCache();

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.john.dao.TEnclosureMapper">
+    <select id="getEnclosureByRelId" resultType="cn.john.dto.EnclosureVo">
+        select id, name,path from  t_enclosure where rel_id = #{relId}
+                                                 and is_del = 0
+    </select>
+    <insert id="copy">
+        INSERT INTO `fa-management`.`t_enclosure` (`name`, `path`, `rel_id`, `created_time`, `updated_time`)
+            (select `name`, `path`, #{newRelId} `rel_id`, now() `created_time`, now() `updated_time` from t_enclosure
+             where rel_id = #{oldRelId}  and is_del = 0)
+    </insert>
+    <update id="delBatch">
+        update t_enclosure set is_del = 1 where rel_id = #{relId} and is_del = 0
+        <if test="ids != null and ids.size != 0">
+            and id not in
+            <foreach item="item" collection="ids" separator="," open="(" close=")" index="">
+                #{item}
+            </foreach>
+        </if>
+    </update>
+</mapper>

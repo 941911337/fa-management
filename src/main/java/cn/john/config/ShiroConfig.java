@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description ShiroConfig
  * @Date 2021/7/14
  **/

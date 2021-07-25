@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description ChangePasswordVo
  * @Date 2021/7/16
  **/

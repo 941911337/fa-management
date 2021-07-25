@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description ChangePasswordVo
  * @Date 2021/7/16
  **/

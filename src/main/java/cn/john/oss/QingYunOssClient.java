@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author yanzhengwei
+ * @Author John Yan
  * @Description QingYunOssClient
  * @Date 2021/7/20
  **/

@@ -1,10 +1,12 @@
 package cn.john.common;
 
 /**
- * 常量表
- * 
- * @author ShenHuaJie
- * @version $Id: Constants.java, v 0.1 2014-2-28 上午11:18:28 ShenHuaJie Exp $
+ * <p>
+ * 常量
+ * </p>
+ *
+ * @author John Yan
+ * @since 2021-07-24
  */
 public interface Constants {
 
@@ -19,12 +21,39 @@ public interface Constants {
 	 */
 	long TOKEN_EXPIRE_TIME = 30 * 60 * 60 * 1000;
 
+	/**
+	 * 青云返回值
+	 */
 	interface  QyCode{
+		/**
+		 * 成功
+		 */
 		int SUCCESS_CODE = 200;
 
+		/**
+		 * 删除成功
+		 */
 		int DEL_SUCCESS_CODE = 204;
 
+		/**
+		 * 上传成功
+		 */
 		int UPLOAD_SUCCESS_CODE = 201;
 	}
+
+	/**
+	 * 删除标识常量
+	 */
+	interface IsDel{
+		//删除
+		int YES = 1;
+		//未删除
+		int NO = 0;
+	}
+
+	/**
+	 * 限制只查一条
+	 */
+	String LIMIT_ONE = "limit 1";
 
 }
