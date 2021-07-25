@@ -18,5 +18,7 @@ bucket4j (令牌桶进行限流 也可以使用nginx进行限流)
 shiro +jwt (作为token生成 开发)
 
 具体依赖搭建自行搭建 使用 仅提供源码
+
 1.0.0 版本初始化构建 使用mybatis 
+
 1.1.0 版本使用mybatis-plus
