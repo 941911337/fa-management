@@ -56,4 +56,20 @@ public interface Constants {
 	 */
 	String LIMIT_ONE = "limit 1";
 
+	/**
+	 * 查询ip地址接口
+	 */
+	String IP_INTERFACE_URL = "http://whois.pconline.com.cn/";
+
+
+	/**
+	 * 本地ip
+	 */
+	String IP = "127.0.0.1";
+
+	/**
+	 * 位置主机名
+	 */
+	String UNKNOWN = "unknown";
+
 }

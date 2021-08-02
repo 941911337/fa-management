@@ -2,6 +2,8 @@ package cn.john.controller;
 
 import cn.hutool.json.JSONUtil;
 import cn.john.dto.JsonMessage;
+import cn.john.log.annotation.SysOperateLog;
+import cn.john.log.annotation.SysOperateMethodLog;
 import cn.john.model.TDict;
 import cn.john.service.ITDictService;
 import cn.john.utils.RedisUtil;
@@ -22,6 +24,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/dict")
+@SysOperateLog(module = "字典管理")
 public class DictController {
 
     private final ITDictService dictService;
@@ -32,22 +35,25 @@ public class DictController {
 
 
     @GetMapping("/getAllDict")
+    @SysOperateMethodLog(method = "查询所有字典")
     public JsonMessage getAllDict() {
         return JsonMessage.success( RedisUtil.get("dict"));
     }
 
 
     @GetMapping("/getDict/{type}")
+    @SysOperateMethodLog(method = "根据类型查询字典")
     public JsonMessage getDict(@PathVariable("type") String type) {
         return JsonMessage.success( RedisUtil.hGet("dictMap",type));
     }
 
     @GetMapping("/reloadDict")
+    @SysOperateMethodLog(method = "重新加载字典")
     public JsonMessage reloadDict() {
         Map<String, List<TDict>> dictMap = dictService.getAllDict();
         RedisUtil.set("dict", JSONUtil.parse(dictMap));
         dictMap.forEach((k,v)->RedisUtil.hPut("dictMap",k, JSONUtil.parse(v)));
-        return JsonMessage.success("成功");
+        return JsonMessage.success();
     }
 
 

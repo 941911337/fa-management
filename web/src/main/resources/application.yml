@@ -14,7 +14,6 @@ spring:
       minimum: 5
       maximum-pool-size: 15
       auto-commit: true
-      idle-timeout: 30000
       pool-name: HikariCP
       max-lifetime: 180000
       connection-timeout: 30000
@@ -34,6 +33,9 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: cn.john.model
   mapper-locations: classpath:mappers/*
+  log:
+    mapper-locations: classpath:mappers/*
+    type-aliases-package: cn.john.log.model
 
 
 
@@ -53,6 +55,8 @@ bucket4j:
             - capacity: 10
               time: 1
               unit: seconds
-
-
+#日志模块开关
+fa:
+  log:
+    enable: false
 

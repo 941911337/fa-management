@@ -3,6 +3,7 @@ package cn.john.controller;
 import cn.john.common.Constants;
 import cn.john.dto.JsonMessage;
 import cn.john.dto.LoginVo;
+import cn.john.log.annotation.SysOperateLog;
 import cn.john.model.TAccount;
 import cn.john.service.ITAccountService;
 import cn.john.util.SysUtil;
@@ -37,7 +38,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public JsonMessage login(@Valid @RequestBody LoginVo loginVo, BindingResult bindingResult) {
-        
         log.info("loginVo:{}",loginVo);
         TAccount account = itAccountService.getAccount(loginVo);
         Map<String, Object> chaim = new HashMap<>(4);

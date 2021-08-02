@@ -31,7 +31,9 @@ public class JsonMessage<T> implements Serializable {
      */
     private T data;
 
-
+    public static <T> JsonMessage<T> success() {
+        return new JsonMessage<T>(SUCCESS.getMessage(), SUCCESS.getCode(), null);
+    }
 
     public static <T> JsonMessage<T> success(Object data) {
         return new JsonMessage<T>(SUCCESS.getMessage(), SUCCESS.getCode(), (T) data);

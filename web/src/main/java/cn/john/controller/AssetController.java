@@ -8,6 +8,8 @@ import cn.john.dto.AssetExportVo;
 import cn.john.dto.AssetPageVo;
 import cn.john.dto.AssetVo;
 import cn.john.dto.JsonMessage;
+import cn.john.log.annotation.SysOperateLog;
+import cn.john.log.annotation.SysOperateMethodLog;
 import cn.john.service.ITAssetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/asset")
+@SysOperateLog(module = "资产管理")
 public class AssetController {
 
     private final ITAssetService assetService;
@@ -37,6 +40,7 @@ public class AssetController {
 
 
     @PostMapping("/saveAsset")
+    @SysOperateMethodLog(method = "保存资产")
     public JsonMessage saveAsset(@Valid @RequestBody AssetVo assetVo, BindingResult bindingResult) {
         assetService.saveAsset(assetVo);
         return JsonMessage.success("成功");
@@ -44,28 +48,33 @@ public class AssetController {
 
 
     @PostMapping("/getPage")
+    @SysOperateMethodLog(method = "分页获取资产")
     public JsonMessage getPage(@Valid @RequestBody AssetPageVo assetPageVo, BindingResult bindingResult) {
         return JsonMessage.success(assetService.getPage(assetPageVo));
     }
 
     @DeleteMapping("/del/{id}")
+    @SysOperateMethodLog(method = "删除资产")
     public JsonMessage del(@PathVariable("id") Long id) {
         assetService.del(id);
         return JsonMessage.success("成功");
     }
 
     @GetMapping("/detail/{id}")
+    @SysOperateMethodLog(method = "获取资产详情")
     public JsonMessage detail(@PathVariable("id") Long id) {
         return JsonMessage.success(assetService.detail(id));
     }
 
     @GetMapping("/copy/{id}")
+    @SysOperateMethodLog(method = "复制资产")
     public JsonMessage copy(@PathVariable("id") Long id) {
         assetService.copy(id);
         return JsonMessage.success("成功");
     }
 
     @GetMapping("/export")
+    @SysOperateMethodLog(method = "导出资产")
     public void export(@RequestParam String assetName, @RequestParam String assetCode,
                        @RequestParam Integer useStatus, HttpServletResponse response) throws IOException {
         List<AssetExportVo> list = assetService.getAllList(assetName,assetCode,useStatus);

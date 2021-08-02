@@ -3,10 +3,12 @@ package cn.john.aspect;
 import cn.john.util.SysUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
@@ -18,6 +20,7 @@ import org.springframework.validation.BindingResult;
 @Aspect
 @Component
 @Slf4j
+@Order(1)
 public class ControllerAspect {
 
     @Pointcut("execution(public * cn.john.controller.*.*(..))")
@@ -29,7 +32,7 @@ public class ControllerAspect {
      * 删除ThreadLocal 放在后置处理
      * @param jp
      */
-    @After("controller()")
+    @AfterReturning("controller()")
     public void after(JoinPoint jp){
         log.info("调用removeThreadUser");
         SysUtil.removeThreadUser();
@@ -48,5 +51,6 @@ public class ControllerAspect {
             }
         }
     }
+
 
 }

@@ -24,11 +24,11 @@ public class GeneratorCodeConfig {
     public static void main(String[] args) {
         //数据源配置
         DataSourceConfig dsc = new DataSourceConfig
-                .Builder("jdbc:mysql://127.0.0.1:3306/fa-management?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true&rewriteBatchedStatements=TRUE&serverTimezone=GMT%2B8&useSSL=false",
-                "dbname","123456")
+                .Builder("jdbc:mysql://127.0.0.1:3306/log_center?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true&rewriteBatchedStatements=TRUE&serverTimezone=GMT%2B8&useSSL=false",
+                "dbName","dbPwd")
                 .typeConvert(new MySqlTypeConvert())
                 .keyWordsHandler(new MySqlKeyWordsHandler())
-                .dbQuery(new MySqlQuery()).schema("fa-management")
+                .dbQuery(new MySqlQuery()).schema("log_center")
                 .build();
         // 全局配置
         GlobalConfig gc = GeneratorBuilder.globalConfigBuilder()
@@ -39,7 +39,7 @@ public class GeneratorCodeConfig {
 
         // 包配置
         PackageConfig packageConfig =new PackageConfig.Builder()
-                .parent("cn.john").entity("model").mapper("dao").build();
+                .parent("cn.john.log").entity("model").mapper("dao").build();
 
         //激活所有默认模板
         TemplateConfig templateConfig = new TemplateConfig.Builder().build();
@@ -59,11 +59,6 @@ public class GeneratorCodeConfig {
                 //控制器属性配置构建
                 .controllerBuilder()
                 .build();
-
-
-
-
-
 
 
         // 自定义配置
